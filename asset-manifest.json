@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/island-lp/static/css/main.fc0706bd.css",
+    "main.js": "/island-lp/static/js/main.02f67bfe.js",
+    "static/media/img54.jpg": "/island-lp/static/media/img54.10fc11b511e31dcecd95.jpg",
+    "static/media/img3.jpg": "/island-lp/static/media/img3.28e4b5b4fdfea7ee2e1f.jpg",
+    "static/media/background.jpg": "/island-lp/static/media/background.a87cf45fea85a8f5c0f1.jpg",
+    "static/media/img5.jpg": "/island-lp/static/media/img5.209a7340a3912c289299.jpg",
+    "static/media/img1.jpg": "/island-lp/static/media/img1.616d4a5594cfa49b6ce3.jpg",
+    "static/media/img2.jpg": "/island-lp/static/media/img2.36fee7fb0527dc973f82.jpg",
+    "static/media/compass.png": "/island-lp/static/media/compass.4f81fc0095b2a0a90e42.png",
+    "index.html": "/island-lp/index.html",
+    "main.fc0706bd.css.map": "/island-lp/static/css/main.fc0706bd.css.map",
+    "main.02f67bfe.js.map": "/island-lp/static/js/main.02f67bfe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc0706bd.css",
+    "static/js/main.02f67bfe.js"
+  ]
+}
