@@ -70,7 +70,7 @@ const Header = () => {
         <Collapse 
             in={animate}
              {...(animate ? { timeout: 2000 } : {})}
-              collapseHeight={50}>
+            >
 
             <div className={classes.titleContainer}>
                 <h1 className={classes.title}>

@@ -2,29 +2,38 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
             //scroll animation
-// import AOS from 'aos';
-// import 'aos/dist/aos.css'; // You can also use <link> for styles
-// AOS.init();
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
 
 import { Grid, Card, Typography, CardMedia, CardContent } from '@material-ui/core';
 
-import image from '../../assets/images/test.jpg';
-import compass from '../../assets/icons/compass.svg';
+import compass from '../../assets/icons/compass.png';
 
 const useStyles = makeStyles((theme)=>({
     root: {
         minHeight: '100vh',
         position: 'relative',
+        // marginBottom: '400px',
     },
     grid:{
-        position: 'absolute',
         width: '100%',
-        height: '100%',
-    },
-    gridItem: {
+        minHeight: '100vh',
 
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            marginBottom: '100px',
+            gap: '100px',
+          },
+        },
+        
+        gridItem: {
+            [theme.breakpoints.down('xs')]: {
+                display: 'flex',
+                justifyContent: 'center',
+              },
     },
+
     card:{
         position: 'relative',
         height: '400px',
@@ -35,47 +44,37 @@ const useStyles = makeStyles((theme)=>({
         justifyContent: 'flex-start',
         alignItems: 'center',
         flexDirection: 'column',
-        overflow: 'hidden'
+        overflow: 'hidden',
+
+        [theme.breakpoints.down('xs')]: {
+            width: '50%',
+            zIndex: 50,
+          },
+        [theme.breakpoints.down('xs')]: {
+            width: '70%',
+            zIndex: 50,
+          },
     },
     cardMedia:{
-        height: '65%'
+        height: '60%'
     },
     cardContent:{
-        height: '35%',
+        height: '40%',
+    },
+    body1: {
+        fontSize: '.8rem',
     },
     Image: {
-      height: '100%',
+        height: '100%',
     }, 
     middleLine: {
         position: 'absolute',
         width: '40px',
-        height: '40px',
         left: '50%',
         top: '50%',
         transform: 'translate(-50%, -50%)',
-
-        '&::before':{
-            content: "''",
-            position: 'absolute',
-            top: '-260px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: '#fff',
-            height: '200px',
-            width: '9px',
-        },
-        '&::after':{
-            content: "''",
-            position: 'absolute',
-            top: '140%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: '#fff',
-            height: '200px',
-            width: '9px',
-        }
     },
-
+    
     compass: {
         width: '100%',
     }
@@ -83,41 +82,44 @@ const useStyles = makeStyles((theme)=>({
 }));
 
 
-const PlaceToVisit = () => {
+const PlaceToVisit = ({ pairIslands }) => {
     const classes = useStyles();
+        
+    AOS.init(
+        {
+            offset: 200, // offset (in px) from the original trigger point
+            delay: 0, // values from 0 to 3000, with step 50ms
+            duration: 700, // values from 0 to 3000, with step 50ms
+            easing: 'ease-in-out', // default easing for AOS animations
+            once: false, // whether animation should happen only once - while scrolling down
+            mirror: true, // whether elements should animate out while scrolling past them
+            anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+        }
+
+    ); //active animations
     
   return (
     <div className={classes.root} id="test">
         <Grid container className={classes.grid} justifyContent='space-evenly' alignItems='center'>
           
-              <Grid item className={classes.gridItem} xs={12} sm={5} md={3} >
-                <Card className={classes.card}>
-                    <CardMedia className={classes.cardMedia}>
-                        <img src={image} alt="" className={classes.Image} />
-                    </CardMedia>
-                    <CardContent className={classes.cardContent}>
-                        <Typography type="h2">Nombre del lugar</Typography>
-                        <Typography type="h6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam explicabo porro, corrupti, optio expedita quam placeat officia consectetur asperiores. Earum modi magnam repellat ut doloremque?</Typography>
-                    </CardContent>
-                </Card>  
-              </Grid>
-        
+        {pairIslands.map((island, i)=>(
+                <Grid key={i} item className={classes.gridItem} xs={12} sm={4} md={3} >
+                    <Card data-aos="zoom-in" className={classes.card}>
+                        <CardMedia className={classes.cardMedia}>
+                            <img src={island.img} alt="" className={classes.Image} />
+                        </CardMedia>
+                        <CardContent className={classes.cardContent}>
+                            <Typography type="h1"> { island.name } </Typography>
+                            <Typography type="body1" className={classes.body1}> { island.description } </Typography>
+                        </CardContent>
+                    </Card>  
+                </Grid>          
+        ))}
+
                 <div className={classes.middleLine} style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-                        <img src={compass} alt="" />    
+                        <img className={classes.compass} src={compass} alt="" />    
                 </div>
 
-              <Grid  item className={classes.gridItem} xs={12} sm={5} md={3} >
-                <Card className={classes.card}>
-                    <CardMedia className={classes.cardMedia}>
-                        <img className={classes.compass} src={image} alt="" className={classes.Image} />
-                    </CardMedia>
-                    <CardContent className={classes.cardContent}>
-                        <Typography type="h2">Nombre del lugar</Typography>
-                        <Typography type="h6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam explicabo porro, corrupti, optio expedita quam placeat officia consectetur asperiores. Earum modi magnam repellat ut doloremque?</Typography>
-                    </CardContent>
-                </Card>  
-              </Grid>
-              
         </Grid>
     </div>
   )
