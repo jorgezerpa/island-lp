@@ -3,16 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
 
 import bg from './assets/images/background.jpg';
-import image from './assets/images/test.jpg';
+import images from './constants/images';
+
 
 
 import Header from './container/Header/Header';
-import PlaceToVisit from './container/PlaceToVisit/PlaceToVisit';
-
+import Places from './container/Places/Places';
 
 
 import { ThemeProvider, createTheme } from '@material-ui/core';
-
 
 const theme = createTheme({
     breakpoints: {
@@ -39,17 +38,15 @@ const useStyles = makeStyles((theme)=>({
 
 
 const FakeData = [
-  {name: 'islandName', img: image, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam explicabo porro, corrupti, optio expedita quam placeat officia consectetur asperiores. Earum modi magnam repellat ut doloremque?'},
-  {name: 'islandName', img: image, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam explicabo porro, corrupti, optio expedita quam placeat officia consectetur asperiores. Earum modi magnam repellat ut doloremque?'},
-  {name: 'islandName', img: image, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam explicabo porro, corrupti, optio expedita quam placeat officia consectetur asperiores. Earum modi magnam repellat ut doloremque?'},
-  {name: 'islandName', img: image, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam explicabo porro, corrupti, optio expedita quam placeat officia consectetur asperiores. Earum modi magnam repellat ut doloremque?'},
-  {name: 'islandName', img: image, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam explicabo porro, corrupti, optio expedita quam placeat officia consectetur asperiores. Earum modi magnam repellat ut doloremque?'},
-  {name: 'islandName', img: image, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam explicabo porro, corrupti, optio expedita quam placeat officia consectetur asperiores. Earum modi magnam repellat ut doloremque?'},
+  {name: 'Bora Bora', img: images.image1, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam.'},
+  {name: 'SeaHorse Reef', img: images.image3, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam.'},
+  {name: 'White Tiger Island', img: images.image4, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam.'},
+  {name: 'KingFisher Shores', img: images.image2, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam.'},
+  {name: 'Little Crab Rock', img: images.image5, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam.'},
+  {name: 'Castawaw Place', img: images.image1, description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam, itaque natus nulla necessitatibus laboriosam.'},
 ];
 
-              //organize data in pairs ->mapping for create pairs arr -> filter for eliminate 'false'
-let dataInPairs = FakeData.map((item, i)=>i%2===0 && [FakeData[i], FakeData[i+1]]).filter(item=> item && item);
-
+   console.log(images)           
 
 const App = () => {
   const classes = useStyles();
@@ -60,13 +57,12 @@ const App = () => {
       <ThemeProvider theme={theme}>
           <div className={classes.root}>
               <CssBaseline />
-              <Header />
-              {dataInPairs.map((pairIslands,i)=>{
-                  return(
-                    <PlaceToVisit key={i}  pairIslands = {pairIslands} />
-                  )
-              })}
+              <Header autoScroll={autoScroll} />
+              <Places FakeData={FakeData} autoScroll={autoScroll} />
 
+              <footer style={{width: '100%', height: '100px', display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'rgba(0,0,0,.6)', color:'#fff'}}>
+                  zerpa Code
+              </footer>
           </div>
       </ThemeProvider>
 

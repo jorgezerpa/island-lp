@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useLayoutEffect} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
 import   SortIcon   from '@material-ui/icons/Sort';
@@ -43,18 +43,30 @@ const useStyles = makeStyles((theme)=>({
     goDown:{
         color: '#5aff3d',
         fontSize: '4rem',
+        transition: '.5s all',
+
+        ['&:hover']:{
+            transform: 'rotate(360deg) scale(1.6)'
+        },
     }
 
 }))
 
 
-const Header = () => {
+const Header = ({ autoScroll }) => {
     const classes = useStyles();
     const [animate, setAnimate] = useState(false);
 
     useEffect(()=>{
         setAnimate(true);
     }, [])
+
+    
+    const scrollToView = ()=>{
+        autoScroll.current.scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
 
   return (
     <div className={classes.root}>
@@ -77,7 +89,7 @@ const Header = () => {
                     Welcome to <br /> 
                     <span className={classes.colorText}>My Island</span>
                 </h1>
-                <IconButton>
+                <IconButton onClick={scrollToView}>
                     <ExpandMoreIcon className={classes.goDown} />
                 </IconButton>
             </div>
